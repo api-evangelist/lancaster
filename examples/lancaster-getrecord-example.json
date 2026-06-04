@@ -1,0 +1,25 @@
+{
+  "request": {
+    "verb": "GetRecord",
+    "metadataPrefix": "oai_dc",
+    "identifier": "oai:eprints.lancs.ac.uk:9",
+    "url": "https://eprints.lancs.ac.uk/cgi/oai2?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:eprints.lancs.ac.uk:9"
+  },
+  "response": {
+    "responseDate": "2026-06-04T03:06:38Z",
+    "record": {
+      "header": {
+        "identifier": "oai:eprints.lancs.ac.uk:9",
+        "datestamp": "2025-12-10T21:36:24Z",
+        "setSpec": ["7374617475733D707562", "74797065733D61727469636C65"]
+      },
+      "metadata": {
+        "title": "The fine-scale remobilization of metals in the surface sediment of the north-east Atlantic.",
+        "creator": ["Emerson, Eric"],
+        "date": "2005-03",
+        "type": ["Journal Article", "PeerReviewed"],
+        "identifier": ["https://eprints.lancs.ac.uk/id/eprint/9/"]
+      }
+    }
+  }
+}

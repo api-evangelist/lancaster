@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lancaster/main/json-schema/lancaster-record-schema.json",
+  "title": "Lancaster EPrints OAI Record",
+  "description": "JSON Schema for a single OAI-PMH record (header + oai_dc Dublin Core metadata) harvested from the Lancaster EPrints repository.",
+  "type": "object",
+  "required": ["header"],
+  "properties": {
+    "header": {
+      "type": "object",
+      "required": ["identifier", "datestamp"],
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "OAI item identifier.",
+          "examples": ["oai:eprints.lancs.ac.uk:9"]
+        },
+        "datestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["deleted"]
+        },
+        "setSpec": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "metadata": {
+      "$ref": "#/$defs/dublinCore"
+    }
+  },
+  "$defs": {
+    "dublinCore": {
+      "type": "object",
+      "description": "Simple Dublin Core (oai_dc) metadata for an EPrints item.",
+      "properties": {
+        "title": { "type": "string" },
+        "creator": { "type": "array", "items": { "type": "string" } },
+        "date": { "type": "string" },
+        "type": { "type": "array", "items": { "type": "string" } },
+        "identifier": { "type": "array", "items": { "type": "string" } },
+        "subject": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "string" },
+        "publisher": { "type": "string" },
+        "relation": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

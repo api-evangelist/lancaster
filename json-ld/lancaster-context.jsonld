@@ -1,0 +1,44 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "oai": "http://www.openarchives.org/OAI/2.0/",
+    "lancaster": "https://eprints.lancs.ac.uk/ns#",
+    "@vocab": "https://eprints.lancs.ac.uk/ns#",
+
+    "University": "schema:CollegeOrUniversity",
+    "name": "schema:name",
+    "url": "schema:url",
+    "email": "schema:email",
+
+    "Repository": "schema:DataCatalog",
+    "repositoryName": "schema:name",
+    "baseURL": { "@id": "schema:url", "@type": "@id" },
+
+    "Record": "schema:CreativeWork",
+    "identifier": "dc:identifier",
+    "datestamp": { "@id": "schema:dateModified", "@type": "schema:DateTime" },
+    "setSpec": "oai:setSpec",
+
+    "title": "dc:title",
+    "creator": "dc:creator",
+    "date": "dc:date",
+    "type": "dc:type",
+    "subject": "dc:subject",
+    "description": "dc:description",
+    "publisher": "dc:publisher",
+    "relation": "dc:relation",
+
+    "metadataPrefix": "oai:metadataPrefix",
+    "metadataNamespace": { "@id": "oai:metadataNamespace", "@type": "@id" }
+  },
+  "@type": "University",
+  "name": "Lancaster University",
+  "url": "https://www.lancaster.ac.uk/",
+  "Repository": {
+    "@type": "Repository",
+    "repositoryName": "Lancaster EPrints",
+    "baseURL": "https://eprints.lancs.ac.uk/cgi/oai2"
+  }
+}

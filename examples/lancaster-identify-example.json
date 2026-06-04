@@ -1,0 +1,18 @@
+{
+  "request": {
+    "verb": "Identify",
+    "url": "https://eprints.lancs.ac.uk/cgi/oai2?verb=Identify"
+  },
+  "response": {
+    "responseDate": "2026-06-04T03:06:07Z",
+    "repositoryName": "Lancaster EPrints",
+    "baseURL": "https://eprints.lancs.ac.uk/cgi/oai2",
+    "protocolVersion": "2.0",
+    "adminEmail": "library.dit@lancaster.ac.uk",
+    "earliestDatestamp": "2019-06-10T15:56:35Z",
+    "deletedRecord": "persistent",
+    "granularity": "YYYY-MM-DDThh:mm:ssZ",
+    "repositoryIdentifier": "eprints.lancs.ac.uk",
+    "sampleIdentifier": "oai:eprints.lancs.ac.uk:10175"
+  }
+}

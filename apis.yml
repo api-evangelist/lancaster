@@ -42,6 +42,20 @@ apis:
     properties:
       - type: Documentation
         url: https://eprints.lancs.ac.uk/cgi/oai2?verb=Identify
+      - type: OpenAPI
+        url: openapi/lancaster-eprints-oai.yaml
+      - type: JSONSchema
+        url: json-schema/lancaster-record-schema.json
+      - type: x-json-structure
+        url: json-structure/lancaster-record-structure.json
+      - type: x-spectral-rules
+        url: rules/lancaster-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/lancaster-vocabulary.yml
+      - type: x-json-ld
+        url: json-ld/lancaster-context.jsonld
+      - type: x-example
+        url: examples/lancaster-getrecord-example.json
   - aid: lancaster:alma-webhook-handler
     name: Lancaster Library Alma Webhook Handler
     description: >-

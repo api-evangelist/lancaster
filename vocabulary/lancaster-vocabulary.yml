@@ -1,0 +1,53 @@
+vocabulary:
+  name: Lancaster EPrints OAI-PMH Vocabulary
+  description: >-
+    Controlled terms observed in the live Lancaster EPrints OAI-PMH 2.0
+    interface and its oai_dc (Dublin Core) records. Used to harvest the
+    research output of Lancaster University.
+  version: '2.0'
+  terms:
+    - term: verb
+      definition: >-
+        Required OAI-PMH request parameter that selects the operation
+        (Identify, ListMetadataFormats, ListSets, ListIdentifiers,
+        ListRecords, GetRecord).
+      tags: [oai-pmh, request]
+    - term: metadataPrefix
+      definition: >-
+        Identifies the metadata format to disseminate. Lancaster supports
+        didl, mets, oai_bibl, oai_dc, rdf, rioxx, and uketd_dc.
+      tags: [oai-pmh, metadata]
+    - term: identifier
+      definition: >-
+        Unique OAI item identifier, e.g. oai:eprints.lancs.ac.uk:9.
+      tags: [oai-pmh, identity]
+    - term: datestamp
+      definition: Date of creation, modification, or deletion of a record.
+      tags: [oai-pmh, temporal]
+    - term: setSpec
+      definition: >-
+        Hex-encoded set membership token used for selective harvesting (e.g.
+        status or subject groupings).
+      tags: [oai-pmh, set]
+    - term: resumptionToken
+      definition: Flow-control token for paging through large list responses.
+      tags: [oai-pmh, pagination]
+    - term: deletedRecord
+      definition: >-
+        Repository policy for deleted records. Lancaster declares "persistent".
+      tags: [oai-pmh, policy]
+    - term: title
+      definition: Dublin Core title of the deposited research item.
+      tags: [dublin-core, descriptive]
+    - term: creator
+      definition: Author or creator of the item.
+      tags: [dublin-core, agent]
+    - term: rioxx
+      definition: >-
+        RIOXX metadata application profile for UK research outputs, supported
+        as an OAI metadata format.
+      tags: [metadata, uk-research]
+    - term: uketd_dc
+      definition: >-
+        UK Electronic Theses and Dissertations Dublin Core profile.
+      tags: [metadata, theses]

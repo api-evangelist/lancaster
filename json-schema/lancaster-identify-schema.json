@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lancaster/main/json-schema/lancaster-identify-schema.json",
+  "title": "Lancaster EPrints OAI Identify",
+  "description": "JSON Schema for the Identify response of the Lancaster EPrints OAI-PMH interface.",
+  "type": "object",
+  "required": ["repositoryName", "baseURL", "protocolVersion"],
+  "properties": {
+    "repositoryName": { "type": "string", "examples": ["Lancaster EPrints"] },
+    "baseURL": { "type": "string", "format": "uri", "examples": ["https://eprints.lancs.ac.uk/cgi/oai2"] },
+    "protocolVersion": { "type": "string", "examples": ["2.0"] },
+    "adminEmail": { "type": "string", "format": "email", "examples": ["library.dit@lancaster.ac.uk"] },
+    "earliestDatestamp": { "type": "string", "format": "date-time", "examples": ["2019-06-10T15:56:35Z"] },
+    "deletedRecord": { "type": "string", "examples": ["persistent"] },
+    "granularity": { "type": "string", "examples": ["YYYY-MM-DDThh:mm:ssZ"] }
+  }
+}

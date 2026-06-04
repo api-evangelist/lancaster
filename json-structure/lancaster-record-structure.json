@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lancaster/main/json-structure/lancaster-record-structure.json",
+  "name": "LancasterEPrintsRecord",
+  "description": "JSON Structure for an OAI-PMH record harvested from the Lancaster EPrints repository.",
+  "type": "object",
+  "properties": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "identifier": { "type": "string" },
+        "datestamp": { "type": "string", "format": "date-time" },
+        "status": { "type": "string" },
+        "setSpec": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["identifier", "datestamp"]
+    },
+    "metadata": {
+      "type": "object",
+      "name": "DublinCore",
+      "properties": {
+        "title": { "type": "string" },
+        "creator": { "type": "array", "items": { "type": "string" } },
+        "date": { "type": "string" },
+        "type": { "type": "array", "items": { "type": "string" } },
+        "identifier": { "type": "array", "items": { "type": "string" } },
+        "subject": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "string" },
+        "publisher": { "type": "string" },
+        "relation": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "required": ["header"]
+}

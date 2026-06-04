@@ -1,0 +1,43 @@
+extends: spectral:oas
+formats:
+  - oas3
+rules:
+  lancaster-info-contact:
+    description: Lancaster API descriptions should carry the library DIT contact.
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+  lancaster-oai-verb-param-required:
+    description: >-
+      The OAI-PMH dispatch operation must declare the required "verb" query
+      parameter (the protocol selects the operation by verb).
+    severity: error
+    given: $.paths['/oai2'].get.parameters[?(@.name=='verb')]
+    then:
+      field: required
+      function: truthy
+  lancaster-oai-verb-enumerated:
+    description: The verb parameter must enumerate the supported OAI-PMH verbs.
+    severity: error
+    given: $.paths['/oai2'].get.parameters[?(@.name=='verb')].schema
+    then:
+      field: enum
+      function: truthy
+  lancaster-metadata-prefix-enumerated:
+    description: >-
+      metadataPrefix should be constrained to the formats this repository
+      actually disseminates.
+    severity: warn
+    given: $.paths['/oai2'].get.parameters[?(@.name=='metadataPrefix')].schema
+    then:
+      field: enum
+      function: truthy
+  lancaster-datetime-granularity:
+    description: from/until selective-harvesting params should use date-time format.
+    severity: warn
+    given: $.paths['/oai2'].get.parameters[?(@.name=='from' || @.name=='until')].schema
+    then:
+      field: format
+      function: truthy
