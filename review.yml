@@ -1,0 +1,46 @@
+---
+name: Lancaster University
+description: Lancaster University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/lancaster/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      Lancaster University (QS World 2025 #141) has a modest but real public,
+      machine-accessible footprint rather than a self-service API developer
+      portal. Verified live: the Lancaster EPrints OAI-PMH 2.0 endpoint returns
+      a valid Identify response (repositoryName "Lancaster EPrints", EPrints
+      3.4.5). The Library's GitHub org (lulibrary) and main org
+      (lancaster-university) host open-source integration code including an
+      Alma webhook handler and Pure metadata tooling. Library loan/fine APIs
+      exist via Ex Libris Alma/Primo (documented on the Ex Libris developer
+      blog) but are internal/gated, powering the iLancaster app. The
+      www.lancaster.ac.uk/api/ path returns a "Not authorised" page, i.e. not a
+      public API portal. No endpoints were fabricated.
+    endpoints:
+      - url: https://eprints.lancs.ac.uk/cgi/oai2?verb=Identify
+        status: 200
+        note: Live OAI-PMH 2.0 Identify; "Lancaster EPrints", EPrints 3.4.5.
+      - url: https://eprints.lancs.ac.uk/
+        status: 200
+        note: Institutional repository front page.
+      - url: https://github.com/lulibrary
+        status: 200
+        note: Lancaster University Library GitHub org; Alma/Pure open-source code.
+      - url: https://github.com/lancaster-university
+        status: 200
+        note: Main Lancaster University GitHub org.
+      - url: https://www.lancaster.ac.uk/api/
+        status: 200
+        note: Returns a "Not authorised" page; not a public API/developer portal.
+      - url: https://developers.exlibrisgroup.com/blog/student-portal-and-institutional-mobile-app-at-lancaster-university/
+        status: 200
+        note: Documents gated Alma/Primo library web services behind iLancaster app.
+      - url: https://pure.lancs.ac.uk/
+        status: 200
+        note: Pure research portal; 302 redirect to pure.lancaster-university.uk. No public API confirmed.
+      - url: https://www.linkedin.com/school/lancaster-university/
+        status: 200
+        note: Official LinkedIn school page.
