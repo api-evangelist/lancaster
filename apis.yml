@@ -83,6 +83,10 @@ apis:
       - type: Documentation
         url: https://developers.exlibrisgroup.com/blog/student-portal-and-institutional-mobile-app-at-lancaster-university/
 common:
+  - type: VulnerabilityDisclosure
+    url: security/lancaster-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/lancaster-domain-security.yml
   - type: Website
     url: https://www.lancaster.ac.uk/
   - type: GitHub
