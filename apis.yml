@@ -83,6 +83,8 @@ apis:
       - type: Documentation
         url: https://developers.exlibrisgroup.com/blog/student-portal-and-institutional-mobile-app-at-lancaster-university/
 common:
+  - type: AgenticAccess
+    url: agentic-access/lancaster-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/lancaster-vulnerability-disclosure.yml
   - type: DomainSecurity
