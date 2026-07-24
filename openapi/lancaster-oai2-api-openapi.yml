@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: Lancaster EPrints OAI-PMH 2.0 Interface Oai2 API
+  description: OpenAPI 3.0 description of the live OAI-PMH 2.0 metadata harvesting interface exposed by the Lancaster EPrints institutional repository (EPrints 3.4.5). The interface is a single HTTP endpoint that dispatches on the required "verb" query parameter and returns OAI-PMH XML envelopes. This description was derived by probing the live endpoint; only verbs, parameters, metadata formats, and response objects observed in production are represented.
+  version: '2.0'
+  contact:
+    name: Lancaster University Library (DIT)
+    email: library.dit@lancaster.ac.uk
+  license:
+    name: OAI-PMH 2.0
+    url: http://www.openarchives.org/OAI/openarchivesprotocol.html
+servers:
+- url: https://eprints.lancs.ac.uk/cgi
+  description: Lancaster EPrints OAI-PMH base
+tags:
+- name: Oai2
+paths:
+  /oai2:
+    get:
+      operationId: oaiRequest
+      summary: OAI-PMH request dispatch
+      description: Single OAI-PMH endpoint. The "verb" parameter selects the operation. Responses are OAI-PMH XML envelopes (Content-Type text/xml). Parameter applicability depends on the verb per the OAI-PMH 2.0 specification.
+      parameters:
+      - name: verb
+        in: query
+        required: true
+        description: The OAI-PMH verb to execute.
+        schema:
+          type: string
+          enum:
+          - Identify
+          - ListMetadataFormats
+          - ListSets
+          - ListIdentifiers
+          - ListRecords
+          - GetRecord
+      - name: metadataPrefix
+        in: query
+        required: false
+        description: Metadata format to disseminate. Required for ListRecords, ListIdentifiers, and GetRecord (unless a resumptionToken is used). Observed supported formats on this repository.
+        schema:
+          type: string
+          enum:
+          - didl
+          - mets
+          - oai_bibl
+          - oai_dc
+          - rdf
+          - rioxx
+          - uketd_dc
+      - name: identifier
+        in: query
+        required: false
+        description: OAI item identifier, e.g. oai:eprints.lancs.ac.uk:10175. Required for GetRecord.
+        schema:
+          type: string
+          example: oai:eprints.lancs.ac.uk:9
+      - name: set
+        in: query
+        required: false
+        description: Set spec to selectively harvest a subset of records.
+        schema:
+          type: string
+      - name: from
+        in: query
+        required: false
+        description: Lower bound (inclusive) for selective harvesting by datestamp. Granularity YYYY-MM-DDThh:mm:ssZ.
+        schema:
+          type: string
+          format: date-time
+      - name: until
+        in: query
+        required: false
+        description: Upper bound (inclusive) for selective harvesting by datestamp. Granularity YYYY-MM-DDThh:mm:ssZ.
+        schema:
+          type: string
+          format: date-time
+      - name: resumptionToken
+        in: query
+        required: false
+        description: Flow-control token returned in an incomplete list response; used to request the next page. Exclusive of other selective arguments.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OAI-PMH XML envelope (success or OAI error element).
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OAIPMHResponse'
+      tags:
+      - Oai2
+components:
+  schemas:
+    OAIPMHResponse:
+      type: object
+      description: Root OAI-PMH XML envelope. Carries responseDate, the echoed request, and exactly one verb-specific payload or an error element. Modeled structurally here since the wire format is XML.
+      properties:
+        responseDate:
+          type: string
+          format: date-time
+        request:
+          type: string
+          description: Echoed base URL with the request attributes (verb, etc.).
+      required:
+      - responseDate
+      - request
+externalDocs:
+  description: OAI-PMH Identify response (live)
+  url: https://eprints.lancs.ac.uk/cgi/oai2?verb=Identify
