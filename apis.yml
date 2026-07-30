@@ -13,9 +13,21 @@ description: >-
   web services that back the iLancaster mobile app. There is no single public,
   self-service API developer portal; most service APIs are internal or gated.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lancaster.png
 url: https://raw.githubusercontent.com/api-evangelist/lancaster/refs/heads/main/apis.yml
 tags:
   - Education
@@ -29,59 +41,66 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: lancaster:eprints-oai
-    name: Lancaster EPrints OAI-PMH
-    description: >-
-      OAI-PMH 2.0 metadata harvesting interface for the Lancaster EPrints
-      institutional repository (running EPrints 3.4.5). Supports standard OAI
-      verbs (Identify, ListRecords, ListMetadataFormats, GetRecord, etc.) for
-      harvesting the intellectual output of Lancaster University. Verified live.
-    humanURL: https://eprints.lancs.ac.uk/
-    baseURL: https://eprints.lancs.ac.uk/cgi/oai2
-    tags: [ Repository, OAI-PMH, EPrints, Research, Open Access, Metadata ]
-    properties:
-      - type: Documentation
-        url: https://eprints.lancs.ac.uk/cgi/oai2?verb=Identify
-      - type: OpenAPI
-        url: openapi/lancaster-eprints-oai.yaml
-      - type: JSONSchema
-        url: json-schema/lancaster-record-schema.json
-      - type: x-json-structure
-        url: json-structure/lancaster-record-structure.json
-      - type: x-spectral-rules
-        url: rules/lancaster-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/lancaster-vocabulary.yml
-      - type: x-json-ld
-        url: json-ld/lancaster-context.jsonld
-      - type: x-example
-        url: examples/lancaster-getrecord-example.json
-  - aid: lancaster:alma-webhook-handler
-    name: Lancaster Library Alma Webhook Handler
-    description: >-
-      Open-source AWS serverless application maintained by Lancaster University
-      Library that listens for Ex Libris Alma webhook events and forwards them
-      to backend SNS topics. Reference code for integrating with the Alma
-      library services platform.
-    humanURL: https://github.com/lulibrary/alma-webhook-handler
-    tags: [ Library, Alma, Webhooks, Serverless, Integration ]
-    properties:
-      - type: Documentation
-        url: https://github.com/lulibrary/alma-webhook-handler
-      - type: GitHub
-        url: https://github.com/lulibrary/alma-webhook-handler
-  - aid: lancaster:library-services
-    name: Lancaster Library Services (Ex Libris Alma/Primo)
-    description: >-
-      Library user, fine, loan, and renewal services exposed via Ex Libris
-      Alma/Primo web services (getUser, getUserCash, getUserLoans,
-      renewUserLoans) that power the iLancaster mobile app and student portal.
-      Documented as an institutional integration; not a public self-service API.
-    humanURL: https://developers.exlibrisgroup.com/blog/student-portal-and-institutional-mobile-app-at-lancaster-university/
-    tags: [ Library, Alma, Primo, Mobile, Gated ]
-    properties:
-      - type: Documentation
-        url: https://developers.exlibrisgroup.com/blog/student-portal-and-institutional-mobile-app-at-lancaster-university/
+- aid: lancaster:alma-webhook-handler
+  name: Lancaster Library Alma Webhook Handler
+  description: >-
+    Open-source AWS serverless application maintained by Lancaster University Library that listens for
+    Ex Libris Alma webhook events and forwards them to backend SNS topics. Reference code for integrating
+    with the Alma library services platform.
+  humanURL: https://github.com/lulibrary/alma-webhook-handler
+  tags:
+  - Library
+  - Alma
+  - Webhooks
+  - Serverless
+  - Integration
+  properties:
+  - type: Documentation
+    url: https://github.com/lulibrary/alma-webhook-handler
+  - type: GitHub
+    url: https://github.com/lulibrary/alma-webhook-handler
+- aid: lancaster:library-services
+  name: Lancaster Library Services (Ex Libris Alma/Primo)
+  description: >-
+    Library user, fine, loan, and renewal services exposed via Ex Libris Alma/Primo web services (getUser,
+    getUserCash, getUserLoans, renewUserLoans) that power the iLancaster mobile app and student portal.
+    Documented as an institutional integration; not a public self-service API.
+  humanURL: >-
+    https://developers.exlibrisgroup.com/blog/student-portal-and-institutional-mobile-app-at-lancaster-university/
+  tags:
+  - Library
+  - Alma
+  - Primo
+  - Mobile
+  - Gated
+  properties:
+  - type: Documentation
+    url: >-
+      https://developers.exlibrisgroup.com/blog/student-portal-and-institutional-mobile-app-at-lancaster-university/
+- aid: lancaster:lancaster-oai2-api
+  name: Lancaster University Oai2 API
+  description: The Oai2 API from Lancaster University — 1 operation(s) for oai2.
+  humanURL: https://eprints.lancs.ac.uk/
+  baseURL: https://eprints.lancs.ac.uk/cgi/oai2
+  tags:
+  - Oai2
+  properties:
+  - type: OpenAPI
+    url: openapi/lancaster-oai2-api-openapi.yml
+  - type: Documentation
+    url: https://eprints.lancs.ac.uk/cgi/oai2?verb=Identify
+  - type: JSONSchema
+    url: json-schema/lancaster-record-schema.json
+  - type: x-json-structure
+    url: json-structure/lancaster-record-structure.json
+  - type: x-spectral-rules
+    url: rules/lancaster-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/lancaster-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/lancaster-context.jsonld
+  - type: x-example
+    url: examples/lancaster-getrecord-example.json
 common:
   - type: AgenticAccess
     url: agentic-access/lancaster-agentic-access.yml
