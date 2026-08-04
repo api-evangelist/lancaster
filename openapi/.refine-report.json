@@ -1,0 +1,14 @@
+{
+  "provider": "lancaster",
+  "sources": [
+    "lancaster-oai2-api-openapi.yml"
+  ],
+  "outputs": [
+    "lancaster-oai2-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
