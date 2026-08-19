@@ -1,0 +1,174 @@
+{
+  "item": [
+    {
+      "id": "4a405d2c-1110-4a9c-ae50-3f8f59ea8b78",
+      "name": "Oai2",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b313e8ca-38dc-4f2a-abb7-3cf52f7769f1",
+          "name": "OAI-PMH request dispatch",
+          "request": {
+            "name": "OAI-PMH request dispatch",
+            "description": {
+              "content": "Single OAI-PMH endpoint. The \"verb\" parameter selects the operation. Responses are OAI-PMH XML envelopes (Content-Type text/xml). Parameter applicability depends on the verb per the OAI-PMH 2.0 specification.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oai2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "verb",
+                  "value": "<string>",
+                  "description": "(Required) The OAI-PMH verb to execute."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadataPrefix",
+                  "value": "<string>",
+                  "description": "Metadata format to disseminate. Required for ListRecords, ListIdentifiers, and GetRecord (unless a resumptionToken is used). Observed supported formats on this repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "identifier",
+                  "value": "<string>",
+                  "description": "OAI item identifier, e.g. oai:eprints.lancs.ac.uk:10175. Required for GetRecord."
+                },
+                {
+                  "disabled": false,
+                  "key": "set",
+                  "value": "<string>",
+                  "description": "Set spec to selectively harvest a subset of records."
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>",
+                  "description": "Lower bound (inclusive) for selective harvesting by datestamp. Granularity YYYY-MM-DDThh:mm:ssZ."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "Upper bound (inclusive) for selective harvesting by datestamp. Granularity YYYY-MM-DDThh:mm:ssZ."
+                },
+                {
+                  "disabled": false,
+                  "key": "resumptionToken",
+                  "value": "<string>",
+                  "description": "Flow-control token returned in an incomplete list response; used to request the next page. Exclusive of other selective arguments."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2244ae0-c6a2-4828-ae7d-e20169854e52",
+              "name": "OAI-PMH XML envelope (success or OAI error element).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oai2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verb",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadataPrefix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "identifier",
+                      "value": "oai:eprints.lancs.ac.uk:9"
+                    },
+                    {
+                      "key": "set",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "until",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "resumptionToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <responseDate>(string)</responseDate>\n  <request>(string)</request>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://eprints.lancs.ac.uk/cgi",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c503c013-9e5e-4d16-a609-499bfcc10fbc",
+    "name": "Lancaster EPrints OAI-PMH 2.0 Interface Oai2 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAPI 3.0 description of the live OAI-PMH 2.0 metadata harvesting interface exposed by the Lancaster EPrints institutional repository (EPrints 3.4.5). The interface is a single HTTP endpoint that dispatches on the required \"verb\" query parameter and returns OAI-PMH XML envelopes. This description was derived by probing the live endpoint; only verbs, parameters, metadata formats, and response objects observed in production are represented.\n\nContact Support:\n Name: Lancaster University Library (DIT)\n Email: library.dit@lancaster.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lancaster EPrints OAI-PMH 2.0 Interface Oai2 API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Oai2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OAI-PMH request dispatch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eprints.lancs.ac.uk/cgi/oai2",
+            "params": [
+              {
+                "name": "verb",
+                "value": "",
+                "type": "query",
+                "description": "The OAI-PMH verb to execute."
+              },
+              {
+                "name": "metadataPrefix",
+                "value": "",
+                "type": "query",
+                "description": "Metadata format to disseminate. Required for ListRecords, ListIdentifiers, and GetRecord (unless a resumptionToken is used). Observed supported formats on this repository."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "OAI item identifier, e.g. oai:eprints.lancs.ac.uk:10175. Required for GetRecord."
+              },
+              {
+                "name": "set",
+                "value": "",
+                "type": "query",
+                "description": "Set spec to selectively harvest a subset of records."
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for selective harvesting by datestamp. Granularity YYYY-MM-DDThh:mm:ssZ."
+              },
+              {
+                "name": "until",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for selective harvesting by datestamp. Granularity YYYY-MM-DDThh:mm:ssZ."
+              },
+              {
+                "name": "resumptionToken",
+                "value": "",
+                "type": "query",
+                "description": "Flow-control token returned in an incomplete list response; used to request the next page. Exclusive of other selective arguments."
+              }
+            ]
+          },
+          "docs": "Single OAI-PMH endpoint. The \"verb\" parameter selects the operation. Responses are OAI-PMH XML envelopes (Content-Type text/xml). Parameter applicability depends on the verb per the OAI-PMH 2.0 specification."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
