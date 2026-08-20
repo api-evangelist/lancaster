@@ -51,6 +51,12 @@ apis:
   tags:
   - Library
   - Alma
+  - Webhook
+  - Serverless
+  - Integration
+  tags_raw:
+  - Library
+  - Alma
   - Webhooks
   - Serverless
   - Integration
