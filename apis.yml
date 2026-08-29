@@ -120,6 +120,9 @@ apis:
   - type: x-example
     url: examples/lancaster-getrecord-example.json
 common:
+  - type: CapabilityMap
+    url: capabilities/lancaster-capability-edges.yml
+    name: Lancaster University Business Capability Map
   - type: AgenticAccess
     url: agentic-access/lancaster-agentic-access.yml
   - type: VulnerabilityDisclosure
