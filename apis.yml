@@ -62,6 +62,17 @@ tags:
   - Institutional Repository
   - Identity Federation
   - Library
+  - Open-Source
+tags_raw:
+  - University
+  - Higher Education
+  - Education
+  - United Kingdom
+  - N8 Research Partnership
+  - Research Data
+  - Institutional Repository
+  - Identity Federation
+  - Library
   - Open Source
 created: '2026-06-03'
 modified: '2026-08-30'
@@ -237,7 +248,7 @@ apis:
   - Alma
   - Webhook
   - Serverless
-  - Open Source
+  - Integration
   tags_raw:
   - Library
   - Alma
