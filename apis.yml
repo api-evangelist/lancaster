@@ -81,24 +81,22 @@ apis:
 - aid: lancaster:lancaster-oai2-api
   name: Lancaster EPrints OAI-PMH 2.0 Interface
   description: >-
-    The one unambiguous, institution-operated public API Lancaster runs. A single HTTP endpoint
-    that dispatches on the OAI-PMH `verb` parameter and returns OAI-PMH 2.0 XML envelopes for the
-    Lancaster EPrints institutional repository. Unauthenticated, no registration, full set
-    hierarchy, working flow control, and seven metadata formats — didl, mets, oai_bibl, oai_dc,
-    rdf, rioxx and uketd_dc. Note the licensing gap: the repository's own Identify response says
-    "No metadata policy defined... if in doubt assume that NO rights at all are granted to this
-    data", so harvesting is technically open and legally undeclared.
+    The one unambiguous, institution-operated public API Lancaster runs. A single HTTP endpoint that dispatches
+    on the OAI-PMH `verb` parameter and returns OAI-PMH 2.0 XML envelopes for the Lancaster EPrints institutional
+    repository. Unauthenticated, no registration, full set hierarchy, working flow control, and seven
+    metadata formats — didl, mets, oai_bibl, oai_dc, rdf, rioxx and uketd_dc. Note the licensing gap:
+    the repository's own Identify response says "No metadata policy defined... if in doubt assume that
+    NO rights at all are granted to this data", so harvesting is technically open and legally undeclared.
   humanURL: https://eprints.lancs.ac.uk/
   baseURL: https://eprints.lancs.ac.uk/cgi/oai2
   x-operator: institution
   x-operator-evidence: >-
-    eprints.lancs.ac.uk is under lancs.ac.uk, which Nominet WHOIS records as "Registered For:
-    University of Lancaster" with nameservers ns1/ns2.lancs.ac.uk; www.lancaster.ac.uk itself
-    CNAMEs to lancs.ac.uk, so the two are one institution. The Identify response returns
-    repositoryName "Lancaster EPrints" and adminEmail library.dit@lancaster.ac.uk. Probed
-    2026-08-30: ?verb=Identify 200 text/xml, ?verb=ListMetadataFormats 200, ?verb=ListSets 200,
-    ?verb=ListRecords&metadataPrefix=rioxx 200 with a resumptionToken. The software is EPrints
-    3.4.5 from the University of Southampton, but the host, the endpoint and the content are
+    eprints.lancs.ac.uk is under lancs.ac.uk, which Nominet WHOIS records as "Registered For: University
+    of Lancaster" with nameservers ns1/ns2.lancs.ac.uk; www.lancaster.ac.uk itself CNAMEs to lancs.ac.uk,
+    so the two are one institution. The Identify response returns repositoryName "Lancaster EPrints" and
+    adminEmail library.dit@lancaster.ac.uk. Probed 2026-08-30: ?verb=Identify 200 text/xml, ?verb=ListMetadataFormats
+    200, ?verb=ListSets 200, ?verb=ListRecords&metadataPrefix=rioxx 200 with a resumptionToken. The software
+    is EPrints 3.4.5 from the University of Southampton, but the host, the endpoint and the content are
     Lancaster's — an institution-operated deployment, not a vendor tenancy.
   tags:
   - OAI-PMH
@@ -129,62 +127,24 @@ apis:
     url: authentication/lancaster-authentication.yml
   - type: Conformance
     url: conformance/lancaster-education-standards-conformance.yml
-- aid: lancaster:identity-federation
-  name: Lancaster Shibboleth Identity Provider (SAML 2.0 metadata)
-  description: >-
-    Lancaster operates its own Shibboleth Identity Provider and self-publishes its SAML 2.0
-    EntityDescriptor at the canonical /idp/shibboleth location. The entity has been registered
-    with the UK Access Federation since 16 April 2014 and is exported to eduGAIN, so the same
-    signed metadata is retrievable from the federation's MDQ service. Identity federation is
-    institution-operated by definition — no vendor sits between the university and this document.
-    This is the surface class the June 2026 university cohort never catalogued, and for Lancaster
-    it is the second of only two genuinely institution-run machine-readable endpoints.
-  humanURL: https://www.lancaster.ac.uk/iss/
-  baseURL: https://idp.lancs.ac.uk
-  x-operator: institution
-  x-operator-evidence: >-
-    Probed 2026-08-30. GET https://idp.lancs.ac.uk/idp/shibboleth returns 200,
-    application/xml;charset=utf-8, 5341 bytes, an <EntityDescriptor> with entityID
-    "https://idp.lancs.ac.uk/idp/shibboleth", shibmd:Scope lancaster.ac.uk and a signing
-    certificate CN=idp.lancs.ac.uk. The UK Access Federation MDQ service returns the same entity
-    signed (200 application/samlmetadata+xml, validUntil 2026-09-20) with
-    mdrpi:RegistrationInfo registrationAuthority http://ukfederation.org.uk, registrationInstant
-    2014-04-16T16:54:28Z; technical.edugain.org returns it too.
-  tags:
-  - Identity Federation
-  - SAML
-  - Shibboleth
-  - Single Sign-On
-  - eduGAIN
-  properties:
-  - type: OpenAPI
-    url: openapi/lancaster-identityfederation-api-openapi.yml
-  - type: Documentation
-    url: https://idp.lancs.ac.uk/idp/shibboleth
-  - type: Authentication
-    url: authentication/lancaster-authentication.yml
-  - type: Conformance
-    url: conformance/lancaster-education-standards-conformance.yml
 - aid: lancaster:pure-research-directory
   name: Lancaster Research Directory (Elsevier Pure) — tenant
   description: >-
-    Lancaster's research information system and public research directory. The data — outputs,
-    people, projects, impact — is Lancaster's; the platform and the contract are Elsevier's.
-    research.lancaster-university.uk CNAMEs to lancaster.elsevierpure.com, and Pure's /ws/api web
-    service answers on the tenant host but rejects unversioned calls. Pure's generic OpenAPI is
-    deliberately NOT saved under this slug: an Elsevier Pure contract attributed to the
-    institution is the single largest source of the misattribution the university pipeline exists
-    to prevent, and it is exactly how Manchester ended up wearing 36 Pure specs.
+    Lancaster's research information system and public research directory. The data — outputs, people,
+    projects, impact — is Lancaster's; the platform and the contract are Elsevier's. research.lancaster-university.uk
+    CNAMEs to lancaster.elsevierpure.com, and Pure's /ws/api web service answers on the tenant host but
+    rejects unversioned calls. Pure's generic OpenAPI is deliberately NOT saved under this slug: an Elsevier
+    Pure contract attributed to the institution is the single largest source of the misattribution the
+    university pipeline exists to prevent, and it is exactly how Manchester ended up wearing 36 Pure specs.
   humanURL: https://research.lancaster-university.uk/
   baseURL: https://research.lancaster-university.uk/ws/api
   x-operator: tenant
   x-operator-evidence: >-
-    Probed 2026-08-30. https://research.lancaster-university.uk/ 200; DNS resolves
-    research.lancaster-university.uk CNAME lancaster.elsevierpure.com CNAME
-    eu.prod.elsevierpure.com. The page markup carries Elsevier and Pure branding. GET /ws/api
-    answers HTTP 500 with the JSON body {"timestamp":1788121079344,"status":999,"error":"None"} —
-    Pure's web service is present and version-gated, live rather than dead. Institution vanity
-    hostname, vendor platform, vendor contract.
+    Probed 2026-08-30. https://research.lancaster-university.uk/ 200; DNS resolves research.lancaster-university.uk
+    CNAME lancaster.elsevierpure.com CNAME eu.prod.elsevierpure.com. The page markup carries Elsevier
+    and Pure branding. GET /ws/api answers HTTP 500 with the JSON body {"timestamp":1788121079344,"status":999,"error":"None"}
+    — Pure's web service is present and version-gated, live rather than dead. Institution vanity hostname,
+    vendor platform, vendor contract.
   x-vendor: Elsevier (Pure)
   tags:
   - Research Information
@@ -197,24 +157,22 @@ apis:
 - aid: lancaster:library-discovery
   name: Lancaster Library Discovery and Services (Ex Libris Alma / Primo VE) — tenant
   description: >-
-    Lancaster University Library runs on the Ex Libris platform: Primo VE for discovery
-    (OneSearch, view identifier 44LAN_INST:LUL_VU1) and Alma for the library services platform
-    behind it, whose getUser / getUserCash / getUserLoans / renewUserLoans web services supply
-    loans, fines and renewals to the iLancaster app and student portal. The tenancy is real and
-    is a genuine institutional fact; the API contract is Ex Libris's and is not saved here. Note
-    that Lancaster's own vanity host onesearch.lancaster.ac.uk resolves to a Lancaster IP but
-    presents a self-signed certificate (subject CN=localhost) before redirecting, so any pointer
-    at that hostname will read as dead to a TLS-verifying client — the working entry point is the
-    lancaster-university.uk host below.
+    Lancaster University Library runs on the Ex Libris platform: Primo VE for discovery (OneSearch, view
+    identifier 44LAN_INST:LUL_VU1) and Alma for the library services platform behind it, whose getUser
+    / getUserCash / getUserLoans / renewUserLoans web services supply loans, fines and renewals to the
+    iLancaster app and student portal. The tenancy is real and is a genuine institutional fact; the API
+    contract is Ex Libris's and is not saved here. Note that Lancaster's own vanity host onesearch.lancaster.ac.uk
+    resolves to a Lancaster IP but presents a self-signed certificate (subject CN=localhost) before redirecting,
+    so any pointer at that hostname will read as dead to a TLS-verifying client — the working entry point
+    is the lancaster-university.uk host below.
   humanURL: https://onesearch.lancaster-university.uk/discovery/search?vid=44LAN_INST:LUL_VU1
   x-operator: tenant
   x-operator-evidence: >-
     Probed 2026-08-30. https://onesearch.lancaster-university.uk/discovery/search?vid=44LAN_INST:LUL_VU1
-    200, serving Primo Explore markup; DNS resolves onesearch.lancaster-university.uk CNAME
-    lancaster.primo.exlibrisgroup.com CNAME eu00.primo.exlibrisgroup.com. The Alma integration is
-    documented on Ex Libris's own developer network, a generic vendor host claimed by other
-    institutions in this cohort, which is why the previous profile's host verdict was `vendor`;
-    the corrected reading is that Lancaster is an Alma/Primo tenant.
+    200, serving Primo Explore markup; DNS resolves onesearch.lancaster-university.uk CNAME lancaster.primo.exlibrisgroup.com
+    CNAME eu00.primo.exlibrisgroup.com. The Alma integration is documented on Ex Libris's own developer
+    network, a generic vendor host claimed by other institutions in this cohort, which is why the previous
+    profile's host verdict was `vendor`; the corrected reading is that Lancaster is an Alma/Primo tenant.
   x-vendor: Ex Libris (Clarivate) — Alma, Primo VE
   tags:
   - Library
@@ -229,20 +187,20 @@ apis:
 - aid: lancaster:alma-webhook-handler
   name: Lancaster Library Alma Webhook Handler (open source)
   description: >-
-    An AWS serverless application written and maintained by Lancaster University Library that
-    listens for Ex Libris Alma webhook events and forwards them to backend SNS topics. It is
-    Lancaster's own code, published under github.com/lulibrary alongside the Library's Alma cache
-    lambdas, Pure extraction tooling (puree, research_metadata, DMAOnline) and Talis Aspire
-    reading-list tools. It is reference implementation and infrastructure, not a callable
-    Lancaster endpoint, and is recorded as such rather than counted as a hosted API.
+    An AWS serverless application written and maintained by Lancaster University Library that listens
+    for Ex Libris Alma webhook events and forwards them to backend SNS topics. It is Lancaster's own code,
+    published under github.com/lulibrary alongside the Library's Alma cache lambdas, Pure extraction tooling
+    (puree, research_metadata, DMAOnline) and Talis Aspire reading-list tools. It is reference implementation
+    and infrastructure, not a callable Lancaster endpoint, and is recorded as such rather than counted
+    as a hosted API.
   humanURL: https://github.com/lulibrary/alma-webhook-handler
   x-operator: institution
   x-operator-evidence: >-
-    github.com is a code host and says nothing about authorship; the artifact says it about
-    itself. The repository belongs to the lulibrary organisation — Lancaster University Library —
-    and describes itself as listening for Ex Libris Alma webhook events on the Library's behalf.
-    Probed 2026-08-30: repository 200, last pushed 2026-06-12. Lancaster's code integrating a
-    vendor's product, which is institution-authored even though the product is not.
+    github.com is a code host and says nothing about authorship; the artifact says it about itself. The
+    repository belongs to the lulibrary organisation — Lancaster University Library — and describes itself
+    as listening for Ex Libris Alma webhook events on the Library's behalf. Probed 2026-08-30: repository
+    200, last pushed 2026-06-12. Lancaster's code integrating a vendor's product, which is institution-authored
+    even though the product is not.
   tags:
   - Library
   - Alma
@@ -260,6 +218,22 @@ apis:
     url: https://github.com/lulibrary/alma-webhook-handler
   - type: GitHub
     url: https://github.com/lulibrary/alma-webhook-handler
+- aid: lancaster:lancaster-idp-api
+  name: Lancaster University Idp API
+  description: The Idp API from Lancaster University — 1 operation(s) for idp.
+  humanURL: https://eprints.lancs.ac.uk/
+  baseURL: https://eprints.lancs.ac.uk/cgi/oai2
+  tags:
+  - Idp
+  properties:
+  - type: OpenAPI
+    url: openapi/lancaster-idp-api-openapi.yml
+  - type: Documentation
+    url: https://idp.lancs.ac.uk/idp/shibboleth
+  - type: Authentication
+    url: authentication/lancaster-authentication.yml
+  - type: Conformance
+    url: conformance/lancaster-education-standards-conformance.yml
 common:
   - type: Website
     url: https://www.lancaster.ac.uk/
