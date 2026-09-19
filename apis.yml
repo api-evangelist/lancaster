@@ -150,6 +150,11 @@ apis:
   - Research Information
   - Pure
   - Research Data
+  - CRI
+  tags_raw:
+  - Research Information
+  - Pure
+  - Research Data
   - CRIS
   properties:
   - type: Documentation
@@ -224,6 +229,8 @@ apis:
   humanURL: https://eprints.lancs.ac.uk/
   baseURL: https://eprints.lancs.ac.uk/cgi/oai2
   tags:
+  - IDP
+  tags_raw:
   - Idp
   properties:
   - type: OpenAPI
