@@ -1,0 +1,83 @@
+openapi: 3.0.3
+info:
+  title: Lancaster University Shibboleth Identity Provider — SAML 2.0 Metadata
+  description: >-
+    Description of the machine-readable surface of Lancaster University's own Shibboleth
+    Identity Provider, derived by probing the live host on 2026-08-30. Lancaster operates this
+    IdP itself: idp.lancs.ac.uk sits under lancs.ac.uk, which Nominet records as registered to
+    the University of Lancaster, and www.lancaster.ac.uk CNAMEs to lancs.ac.uk. Identity
+    federation is institution-operated by definition — there is no vendor between the university
+    and this metadata.
+
+    Only two things are described here, and both were fetched: the IdP's self-published SAML 2.0
+    EntityDescriptor, and the same entity as served by the UK Access Federation's MDQ service.
+    The SAML SSO, ArtifactResolution and AttributeQuery endpoints enumerated inside that metadata
+    are SAML protocol bindings, not REST operations, and are deliberately NOT modelled as paths;
+    they are listed in the endpoint description below and in
+    authentication/lancaster-authentication.yml.
+  version: '2.0'
+  contact:
+    name: Lancaster University Information Systems Services
+    url: https://www.lancaster.ac.uk/iss/
+  license:
+    name: SAML V2.0 Metadata (OASIS)
+    url: https://docs.oasis-open.org/security/saml/v2.0/saml-metadata-2.0-os.pdf
+externalDocs:
+  description: UK Access Federation
+  url: https://www.ukfederation.org.uk/
+servers:
+  - url: https://idp.lancs.ac.uk
+    description: Lancaster University Shibboleth Identity Provider
+paths:
+  /idp/shibboleth:
+    get:
+      operationId: getIdpSamlMetadata
+      summary: Retrieve the IdP's SAML 2.0 metadata
+      description: >-
+        Returns the Identity Provider's self-published SAML 2.0 EntityDescriptor. Observed
+        2026-08-30: HTTP 200, application/xml;charset=utf-8, 5341 bytes, entityID
+        "https://idp.lancs.ac.uk/idp/shibboleth". The IDPSSODescriptor advertises
+        protocolSupportEnumeration "urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol
+        urn:oasis:names:tc:SAML:2.0:protocol" and a shibmd:Scope of lancaster.ac.uk, and carries
+        an X.509 signing certificate with CN=idp.lancs.ac.uk. The bindings it enumerates are
+        HTTP-POST, HTTP-POST-SimpleSign and HTTP-Redirect SSO under
+        /idp/profile/SAML2/{POST,POST-SimpleSign,Redirect}/SSO, the Shibboleth 1.0 AuthnRequest
+        profile at /idp/profile/Shibboleth/SSO, and SOAP ArtifactResolution and AttributeQuery
+        on port 8443.
+      responses:
+        '200':
+          description: SAML 2.0 EntityDescriptor for the Lancaster IdP.
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/EntityDescriptor'
+components:
+  schemas:
+    EntityDescriptor:
+      type: object
+      description: >-
+        SAML 2.0 metadata root element. The wire format is XML; this is a structural sketch of
+        the elements actually observed in Lancaster's document, not a translation of the SAML
+        metadata schema.
+      properties:
+        entityID:
+          type: string
+          description: Unique identifier of the SAML entity.
+          example: https://idp.lancs.ac.uk/idp/shibboleth
+        protocolSupportEnumeration:
+          type: string
+          description: Space-separated list of protocols the IDPSSODescriptor supports.
+          example: urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol
+        scope:
+          type: string
+          description: shibmd:Scope asserted by the IdP for scoped attribute values.
+          example: lancaster.ac.uk
+      required:
+        - entityID
+x-provenance:
+  generated: '2026-08-30'
+  method: probed
+  source: >-
+    Written by API Evangelist from live probes of https://idp.lancs.ac.uk/idp/shibboleth,
+    the UK Access Federation MDQ entity and technical.edugain.org on 2026-08-30. Lancaster
+    University did not publish this description; it describes a surface Lancaster operates.

@@ -1,0 +1,86 @@
+generated: '2026-08-30'
+method: probed
+source: >-
+  Authentication posture observed by probing Lancaster University-operated hosts on 2026-08-30.
+  Each statement below names the surface it applies to; no posture is generalised across
+  surfaces, because Lancaster's differ sharply.
+provider: Lancaster University
+providerId: lancaster
+description: >-
+  Lancaster University publishes no API key programme, no developer registration and no OAuth
+  authorisation server of its own. Its one open machine-readable API is unauthenticated; its
+  identity surface is the authentication system itself; everything else on a lancaster.ac.uk or
+  lancs.ac.uk hostname that a client might want is behind institutional single sign-on.
+surfaces:
+- api: lancaster:lancaster-oai2-api
+  name: Lancaster EPrints OAI-PMH 2.0 interface
+  x-operator: institution
+  scheme: none
+  registration: none
+  evidence:
+    url: https://eprints.lancs.ac.uk/cgi/oai2?verb=Identify
+    status: 200
+    detail: >-
+      Anonymous GET returns a full Identify response with no credential, no key parameter and no
+      WWW-Authenticate challenge. Selective harvesting, ListSets and ListRecords are equally open.
+  rights_note: >-
+    Open does not mean licensed. The Identify response's eprints description block returns
+    "No metadata policy defined. This server has not yet been fully configured... if in doubt
+    assume that NO rights at all are granted to this data", and the same wording for the data
+    and submission policies. Harvesting is technically unrestricted and legally undeclared;
+    https://eprints.lancs.ac.uk/policies.html is the URL the repository itself points at.
+- api: lancaster:identity-federation
+  name: Lancaster Shibboleth Identity Provider (SAML 2.0)
+  x-operator: institution
+  scheme: saml2
+  registration: federation
+  evidence:
+    url: https://idp.lancs.ac.uk/idp/shibboleth
+    status: 200
+    detail: >-
+      The metadata document is served anonymously - that is the point of it. Using the IdP,
+      as opposed to reading its metadata, requires the relying party to be a registered UK
+      Access Federation or eduGAIN service provider; attribute release is governed by the
+      federation, not by a self-service developer signup.
+  endpoints:
+    sso_post: https://idp.lancs.ac.uk/idp/profile/SAML2/POST/SSO
+    sso_redirect: https://idp.lancs.ac.uk/idp/profile/SAML2/Redirect/SSO
+    attribute_query: https://idp.lancs.ac.uk:8443/idp/profile/SAML2/SOAP/AttributeQuery
+    artifact_resolution: https://idp.lancs.ac.uk:8443/idp/profile/SAML2/SOAP/ArtifactResolution
+- api: lancaster:student-portal
+  name: iLancaster / Lancaster portal
+  x-operator: institution
+  scheme: sso
+  registration: institutional_account
+  evidence:
+    url: https://portal.lancaster.ac.uk/
+    status: 200
+    detail: >-
+      Redirects to https://weblogin.lancs.ac.uk/login/?cosign-https-cosign2.lancs.ac.uk with a
+      JWT handoff (jwt/auth_any.php?ID=PortalLive). Lancaster runs CoSign for local web SSO
+      alongside Shibboleth for federated access. No anonymous data is reachable behind it, so no
+      contract is described here.
+- api: lancaster:pure-research-directory
+  name: Elsevier Pure research directory
+  x-operator: tenant
+  scheme: vendor_controlled
+  detail: >-
+    Pure's /ws/api web service responds on the tenant host but rejects unversioned requests -
+    HTTP 500 with body {"timestamp":...,"status":999,"error":"None"}. Keys for it are issued by
+    Elsevier through the institution's Pure administrators, not by a Lancaster developer programme.
+- api: lancaster:library-discovery
+  name: Ex Libris Alma / Primo VE
+  x-operator: tenant
+  scheme: vendor_controlled
+  detail: >-
+    Alma API keys are issued through the Ex Libris Developer Network against the institution's
+    Alma instance. Lancaster operates the tenancy; Ex Libris operates the key programme.
+absent:
+- api_keys
+- oauth2
+- openid_connect_discovery
+- developer_registration
+- mtls
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

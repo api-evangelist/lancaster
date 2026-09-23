@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Lancaster EPrints OAI-PMH 2.0 Interface Oai2 API
   description: OpenAPI 3.0 description of the live OAI-PMH 2.0 metadata harvesting interface exposed by the Lancaster EPrints institutional repository (EPrints 3.4.5). The interface is a single HTTP endpoint that dispatches on the required "verb" query parameter and returns OAI-PMH XML envelopes. This description was derived by probing the live endpoint; only verbs, parameters, metadata formats, and response objects observed in production are represented.

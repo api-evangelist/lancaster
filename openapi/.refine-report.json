@@ -1,14 +1,28 @@
 {
   "provider": "lancaster",
   "sources": [
-    "lancaster-oai2-api-openapi.yml"
+    "_original/lancaster-eprints-oai.yaml",
+    "_original/lancaster-idp-saml-metadata.yaml"
   ],
   "outputs": [
-    "lancaster-oai2-api-openapi.yml"
+    "lancaster-oai2-api-openapi.yml",
+    "lancaster-idp-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "lancaster-eprints-oai.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "lancaster-eprints-oai.yaml: tagged paths GET /oai2 -> Oai2",
+    "lancaster-eprints-oai.yaml: declared missing tag: Oai2",
+    "lancaster-idp-saml-metadata.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "lancaster-idp-saml-metadata.yaml: tagged paths GET /idp/shibboleth -> Idp",
+    "lancaster-idp-saml-metadata.yaml: declared missing tag: Idp",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "lancaster-idp-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lancaster-oai2-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

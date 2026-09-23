@@ -1,0 +1,131 @@
+generated: '2026-08-30'
+method: probed
+source: >-
+  Live probes of Lancaster University-operated hosts on 2026-08-30, run as part of the API
+  Evangelist university pipeline. Every hit below names the exact URL that returned the evidence.
+  No conformance is recorded from a prose claim, and nothing here is inferred from software
+  branding alone.
+provider: Lancaster University
+providerId: lancaster
+regime: education
+description: >-
+  Conformance of Lancaster University's own machine-readable surfaces against the Kin Score
+  `education` regime standards (scim, lti, oneroster, ed-fi, caliper, qti, oai-pmh, shibboleth,
+  saml, orcid, datacite, crossref). Reward-only: an entry under not_found means "no public
+  Lancaster-operated surface implementing it was found on 2026-08-30", never "not in use
+  internally".
+standards:
+- id: oai-pmh
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://eprints.lancs.ac.uk/cgi/oai2?verb=Identify
+    status: 200
+    content_type: text/xml; charset=UTF-8
+    detail: >-
+      Lancaster EPrints answers a complete OAI-PMH 2.0 Identify response on Lancaster's own host.
+      repositoryName "Lancaster EPrints", baseURL https://eprints.lancs.ac.uk/cgi/oai2,
+      protocolVersion 2.0, adminEmail library.dit@lancaster.ac.uk, granularity
+      YYYY-MM-DDThh:mm:ssZ, deletedRecord persistent, earliestDatestamp 2019-06-10T15:56:35Z,
+      repositoryIdentifier eprints.lancs.ac.uk. lancs.ac.uk is registered to the University of
+      Lancaster (Nominet WHOIS, "Registered For: University of Lancaster") and
+      www.lancaster.ac.uk itself CNAMEs to lancs.ac.uk, so the host is the institution's own.
+      The repository software is EPrints 3.4.5 (University of Southampton), but the endpoint,
+      the host and the content are Lancaster's, which is exactly the case the university
+      pipeline calls institution-operated rather than tenant.
+  additional_evidence:
+  - url: https://eprints.lancs.ac.uk/cgi/oai2?verb=ListMetadataFormats
+    status: 200
+    note: >-
+      Seven metadata formats disseminated - didl, mets, oai_bibl, oai_dc, rdf, rioxx, uketd_dc.
+      rioxx is the RIOXX v2.0 UK research-output application profile; uketd_dc is the EThOS
+      UK electronic theses profile.
+  - url: https://eprints.lancs.ac.uk/cgi/oai2?verb=ListSets
+    status: 200
+    note: >-
+      Full set hierarchy published (status, type and LC subject sets, hex-encoded setSpecs) -
+      selective harvesting is genuinely supported, not merely declared.
+  - url: https://eprints.lancs.ac.uk/cgi/oai2?verb=ListRecords&metadataPrefix=rioxx
+    status: 200
+    note: >-
+      217KB of live rioxx records returned on first page with a resumptionToken; flow control
+      works. No ORCID iDs and only incidental DOIs appear in the records.
+- id: shibboleth
+  status: conformant
+  operator: institution
+  evidence:
+    url: https://idp.lancs.ac.uk/idp/shibboleth
+    status: 200
+    content_type: application/xml;charset=utf-8
+    detail: >-
+      Lancaster operates its own Shibboleth Identity Provider and publishes its SAML metadata at
+      the canonical /idp/shibboleth location. The document is an <EntityDescriptor> with
+      entityID "https://idp.lancs.ac.uk/idp/shibboleth", an IDPSSODescriptor advertising
+      protocolSupportEnumeration "urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol
+      urn:oasis:names:tc:SAML:2.0:protocol", and a shibmd:Scope of lancaster.ac.uk. Signing
+      certificate CN=idp.lancs.ac.uk. Identity federation is institution-operated by definition:
+      no vendor sits between Lancaster and this metadata.
+- id: saml
+  status: conformant
+  operator: institution
+  evidence:
+    url: http://mdq.ukfederation.org.uk/entities/https%3A%2F%2Fidp.lancs.ac.uk%2Fidp%2Fshibboleth
+    status: 200
+    content_type: application/samlmetadata+xml
+    detail: >-
+      Lancaster's IdP is a registered UK Access Federation entity. The federation's MDQ service
+      returns a signed (RSA-SHA256, enveloped XML signature) SAML 2.0 EntityDescriptor for
+      entityID https://idp.lancs.ac.uk/idp/shibboleth, cacheDuration PT6H, validUntil
+      2026-09-20T15:00:27Z. mdrpi:RegistrationInfo names registrationAuthority
+      http://ukfederation.org.uk with registrationInstant 2014-04-16T16:54:28Z, so the entity
+      has been federated for over a decade.
+  additional_evidence:
+  - url: https://technical.edugain.org/api.php?action=show_entity&entityid=https://idp.lancs.ac.uk/idp/shibboleth
+    status: 200
+    note: >-
+      The same entity is exported to eduGAIN, giving the IdP interfederation reach beyond the UK.
+  - url: https://idp.lancs.ac.uk/idp/shibboleth
+    status: 200
+    note: >-
+      Self-published metadata enumerates concrete SAML 2.0 endpoints - HTTP-POST, HTTP-POST-SimpleSign
+      and HTTP-Redirect SSO at /idp/profile/SAML2/..., plus SOAP ArtifactResolution and AttributeQuery
+      on port 8443.
+not_found:
+- id: scim
+  detail: >-
+    No public SCIM 2.0 endpoint or SCIM documentation found on a Lancaster-operated host.
+    Provisioning appears to run through the SSO estate (CoSign weblogin at weblogin.lancs.ac.uk
+    plus the Shibboleth IdP), which publishes no SCIM surface.
+- id: lti
+  detail: >-
+    Lancaster runs Moodle for teaching. Any LTI conformance belongs to the Moodle platform's
+    contract, and no Lancaster-operated LTI launch or registration endpoint was reachable
+    without a Lancaster credential.
+- id: oneroster
+  detail: No IMS/1EdTech OneRoster endpoint found on a Lancaster-operated host.
+- id: ed-fi
+  detail: Ed-Fi is a K-12 data standard; no Lancaster surface implements it.
+- id: caliper
+  detail: No Caliper Analytics event store or endpoint found on a public Lancaster host.
+- id: qti
+  detail: No public QTI assessment interchange surface found.
+- id: orcid
+  detail: >-
+    Lancaster's research information system is Elsevier Pure (research.lancaster-university.uk
+    CNAME lancaster.elsevierpure.com), and Pure's ORCID integration is Elsevier's contract, not
+    Lancaster's. The institution-operated EPrints OAI-PMH feed carries no ORCID iDs - a rioxx
+    ListRecords page of 217KB returned zero matches for "orcid".
+- id: datacite
+  detail: >-
+    No Lancaster-operated DataCite-conformant API surface was probed successfully. DOI minting
+    for Lancaster research data runs through vendor platforms.
+- id: crossref
+  detail: No Lancaster-operated Crossref deposit or query surface found.
+notes: >-
+  Nothing here is credited to Elsevier Pure or Ex Libris. Lancaster's Pure research directory and
+  its Primo VE discovery layer both resolve, by CNAME, onto vendor infrastructure
+  (lancaster.elsevierpure.com and lancaster.primo.exlibrisgroup.com) and are recorded in apis.yml
+  as tenant relationships. Their standards conformance is the vendors' to claim.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

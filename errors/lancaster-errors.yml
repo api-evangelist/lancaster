@@ -1,0 +1,63 @@
+generated: '2026-08-30'
+method: probed
+source: >-
+  Every error condition below was triggered against the live Lancaster EPrints OAI-PMH endpoint
+  at https://eprints.lancs.ac.uk/cgi/oai2 on 2026-08-30 and the response text recorded verbatim.
+  Nothing is copied from the OAI-PMH specification without having been observed on this host.
+provider: Lancaster University
+providerId: lancaster
+api: lancaster:lancaster-oai2-api
+description: >-
+  Error behaviour of the Lancaster EPrints OAI-PMH 2.0 interface. The endpoint follows the
+  OAI-PMH convention of returning HTTP 200 for protocol errors and carrying the condition in an
+  <error code="..."> element inside the OAI-PMH envelope. A client that reads only the HTTP
+  status will treat every one of these as a success - which is the single most important thing
+  to know when integrating with it.
+transport:
+  http_status_on_error: 200
+  content_type: text/xml; charset=UTF-8
+  envelope: >-
+    <OAI-PMH> root carrying <responseDate>, the echoed <request>, and one or more <error>
+    elements in place of the verb payload.
+errors:
+- code: badVerb
+  http_status: 200
+  message: The value of the verb argument is not a legal OAI-PMH verb
+  trigger: GET /cgi/oai2?verb=Bogus
+  note: >-
+    Observed alongside a second badArgument error ("Bad verb argument") in the same envelope -
+    this repository can return multiple <error> elements for one request, so a client must
+    iterate rather than read the first.
+- code: badArgument
+  http_status: 200
+  message: Missing required argument 'identifier'
+  trigger: GET /cgi/oai2?verb=GetRecord&metadataPrefix=oai_dc
+- code: idDoesNotExist
+  http_status: 200
+  message: "'oai:eprints.lancs.ac.uk:99999999' is not a valid item in this repository"
+  trigger: GET /cgi/oai2?verb=GetRecord&identifier=oai:eprints.lancs.ac.uk:99999999&metadataPrefix=oai_dc
+- code: cannotDisseminateFormat
+  http_status: 200
+  message: "Record not available as metadata type: 'nosuch'"
+  trigger: GET /cgi/oai2?verb=ListRecords&metadataPrefix=nosuch
+  note: >-
+    Supported prefixes on this repository are didl, mets, oai_bibl, oai_dc, rdf, rioxx and
+    uketd_dc.
+- code: noRecordsMatch
+  http_status: 200
+  message: No items match. None. None at all. Not even deleted ones.
+  trigger: GET /cgi/oai2?verb=ListRecords&metadataPrefix=oai_dc&from=2030-01-01T00:00:00Z
+  note: >-
+    EPrints 3.4.5 phrasing, not the specification's. Match on the code, never on the message.
+observed_but_not_triggered:
+- code: badResumptionToken
+  detail: >-
+    Flow control is in use (a resumptionToken is returned on the first ListRecords page), so the
+    condition exists, but no expired or malformed token was submitted during this run.
+- code: noSetHierarchy
+  detail: >-
+    Not reachable on this host - ListSets returns a full set hierarchy, so the repository never
+    raises it.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
