@@ -25,16 +25,20 @@ x-category: Public Research University
 type: Index
 deliveryModel:
   model: saas
-  open_source: false
-  commercial: false
+  license_evidence:
+    not_product:
+    - lulibrary/alma-webhook-handler
+  open_source: unknown
+  commercial: true
   callable_host: true
-  label: Institution-operated endpoints · no commercial API product
-  confidence: high
+  label: Hosted service · you call their endpoint
+  confidence: low
   source:
   - openapi
-  - probed
-  generated: '2026-08-30'
-  method: probed
+  - pricing
+  - repository-not-product
+  generated: '2026-09-25'
+  method: derived
 accessModel:
   pricing: free
   onboarding: none
@@ -62,7 +66,7 @@ tags:
   - Institutional Repository
   - Identity Federation
   - Library
-  - Open-Source
+  - Open Source
 tags_raw:
   - University
   - Higher Education
@@ -74,6 +78,7 @@ tags_raw:
   - Identity Federation
   - Library
   - Open Source
+  - Open-Source
 created: '2026-06-03'
 modified: '2026-08-30'
 specificationVersion: '0.23'
