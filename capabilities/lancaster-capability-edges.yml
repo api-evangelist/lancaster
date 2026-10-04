@@ -4,6 +4,7 @@ generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
 - Education
+- Software & Technology
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,8 +12,19 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 2
 edges:
+- tag: IDP
+  spec_file: lancaster-idp-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: GET /idp/shibboleth getIdpSamlMetadata "Retrieve the IdP's SAML 2.0 metadata"; schema EntityDescriptor
+  reason: The single operation publishes SAML 2.0 federation metadata for the university's own Shibboleth
+    Identity Provider — i.e. identity federation plumbing for single sign-on, which falls under Identity
+    & Access Management. Confidence held at 0.75 because the surface is a single read-only metadata endpoint
+    rather than full IAM administration.
 - tag: Oai2
   spec_file: lancaster-oai2-api-openapi.yml
   capability_id: BC-4780.40
