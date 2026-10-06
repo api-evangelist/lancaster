@@ -80,7 +80,7 @@ tags_raw:
   - Open Source
   - Open-Source
 created: '2026-06-03'
-modified: '2026-08-30'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: lancaster:lancaster-oai2-api
@@ -247,6 +247,8 @@ apis:
   - type: Conformance
     url: conformance/lancaster-education-standards-conformance.yml
 common:
+  - url: https://www.lancaster.ac.uk/news/
+    type: Blog
   - type: Website
     url: https://www.lancaster.ac.uk/
   - type: Documentation
