@@ -234,9 +234,10 @@ apis:
   humanURL: https://eprints.lancs.ac.uk/
   baseURL: https://eprints.lancs.ac.uk/cgi/oai2
   tags:
-  - IDP
+  - Intelligent Document Processing
   tags_raw:
   - Idp
+  - IDP
   properties:
   - type: OpenAPI
     url: openapi/lancaster-idp-api-openapi.yml
