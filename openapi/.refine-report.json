@@ -2,24 +2,31 @@
   "provider": "lancaster",
   "sources": [
     "_original/lancaster-eprints-oai.yaml",
-    "_original/lancaster-idp-saml-metadata.yaml"
+    "_original/lancaster-idp-saml-metadata.yaml",
+    "_original/lancaster-openapi.yml"
   ],
   "outputs": [
     "lancaster-oai2-api-openapi.yml",
-    "lancaster-idp-api-openapi.yml"
+    "lancaster-idp-api-openapi.yml",
+    "lancaster-authority-control-tasks-api-openapi.yml",
+    "lancaster-lending-requests-api-openapi.yml",
+    "lancaster-printouts-api-openapi.yml",
+    "lancaster-requested-resources-api-openapi.yml",
+    "lancaster-test-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "lancaster-eprints-oai.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "lancaster-eprints-oai.yaml: tagged paths GET /oai2 -> Oai2",
     "lancaster-eprints-oai.yaml: declared missing tag: Oai2",
     "lancaster-idp-saml-metadata.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "lancaster-idp-saml-metadata.yaml: tagged paths GET /idp/shibboleth -> Idp",
     "lancaster-idp-saml-metadata.yaml: declared missing tag: Idp",
-    "apis.yml register: already-registered"
+    "lancaster-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+5 apis, 10 total)"
   ],
   "skipped": [
     "lancaster-idp-api-openapi.yml: previously refined output, superseded by openapi/_original/",
